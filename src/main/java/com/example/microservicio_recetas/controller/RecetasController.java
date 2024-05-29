@@ -6,10 +6,13 @@ import org.springframework.web.server.ResponseStatusException;
 import com.example.microservicio_recetas.model.RecetasEntity;
 import com.example.microservicio_recetas.repository.RecetasRepository;
 import com.example.microservicio_recetas.service.ContainerMetadataService;
+import com.example.microservicio_recetas.model.dto.RecetaDto;
 
-
+import java.time.LocalDateTime;
+import java.time.format.DateTimeFormatter;
 import java.util.Date;
 import java.util.List;
+import java.util.stream.Collectors;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
@@ -34,19 +37,79 @@ public class RecetasController {
     @Autowired
 	private ContainerMetadataService containerMetadataService;
 
-    @GetMapping("/{idReceta}")
-    public @ResponseBody RecetasEntity obtenerDetalleReceta(@PathVariable int idReceta) {
-        return recetasRepository.findById(idReceta)
-        .orElseThrow(() -> new ResponseStatusException(HttpStatus.INTERNAL_SERVER_ERROR, "Error en la peticion"));
+    @GetMapping("/{idRecetaSolicitada}")
+    public @ResponseBody RecetaDto obtenerDetalleReceta(@PathVariable int idRecetaSolicitada) {
+        Object[] elemento=recetasRepository.obtenerRecetaPorId(idRecetaSolicitada).get(0);
+        Integer idReceta = (Integer)elemento[0];
+        String nombreGenericoMedicamentoPrescrito = (String) elemento[1];
+        String viaCuidadoEspecialesAdministracion = (String) elemento[2];
+        String concentracionDosificacion = (String) elemento[3];
+        String frecuenciaAdministracion24hrs = (String) elemento[4];
+        String duracionTratamiento = elemento[5]+"";
+        Date fechaVencimiento = (Date)elemento[6];
+        String precaucionesEspeciales = (String) elemento[7]+"";
+        String indicacionesEspeciales = (String) elemento[8]+"";
+        Integer idMedico = (Integer) elemento[9];
+        Integer idHistoriaClinica = (Integer) elemento[10];
+        Date createdAt =(Date)elemento[11];
+        Date updatedAt = (Date)elemento[12];
+        String ciPropietario = (String) elemento[13];
+        String pacientePropietario = (String) elemento[14];
+        Date deletedAt = (Date)elemento[15];
+        return new RecetaDto(idReceta, nombreGenericoMedicamentoPrescrito, viaCuidadoEspecialesAdministracion,concentracionDosificacion, frecuenciaAdministracion24hrs, duracionTratamiento,fechaVencimiento, precaucionesEspeciales, indicacionesEspeciales, idMedico,idHistoriaClinica, createdAt, updatedAt, ciPropietario, pacientePropietario ,deletedAt);
+        // return recetasRepository.findById(idReceta)
+        // .orElseThrow(() -> new ResponseStatusException(HttpStatus.INTERNAL_SERVER_ERROR, "Error en la peticion"));
     }
     @GetMapping()
-    public @ResponseBody List<RecetasEntity> obtenerTodasRecetas() {
-        return recetasRepository.findAll();
+    public @ResponseBody List<RecetaDto> obtenerTodasRecetas() {
+        List<Object[]> infoRecetas=recetasRepository.obtenerRecetas();
+        DateTimeFormatter formatter = DateTimeFormatter.ISO_OFFSET_DATE_TIME;
+        return infoRecetas.stream().map((Object[] elemento) -> {
+            Integer idReceta = (Integer) elemento[0];
+            String nombreGenericoMedicamentoPrescrito = (String) elemento[1];
+            String viaCuidadoEspecialesAdministracion = (String) elemento[2];
+            String concentracionDosificacion = (String) elemento[3];
+            String frecuenciaAdministracion24hrs = (String) elemento[4];
+            String duracionTratamiento = elemento[5]+"";
+            Date fechaVencimiento = (Date)elemento[6];
+            String precaucionesEspeciales = (String) elemento[7]+"";
+            String indicacionesEspeciales = (String) elemento[8]+"";
+            Integer idMedico = (Integer) elemento[9];
+            Integer idHistoriaClinica = (Integer) elemento[10];
+            Date createdAt =(Date)elemento[11];
+            Date updatedAt = (Date)elemento[12];
+            String ciPropietario = (String) elemento[13];
+            String pacientePropietario = (String) elemento[14];
+            Date deletedAt = (Date)elemento[15];
+
+            return new RecetaDto(idReceta, nombreGenericoMedicamentoPrescrito, viaCuidadoEspecialesAdministracion,concentracionDosificacion, frecuenciaAdministracion24hrs, duracionTratamiento,fechaVencimiento, precaucionesEspeciales, indicacionesEspeciales, idMedico,idHistoriaClinica, createdAt, updatedAt, ciPropietario, pacientePropietario ,deletedAt);
+        }).collect(Collectors.toList());
+        // return recetasRepository.obtenerRecetas();
     }
     @GetMapping("/paciente/{idPaciente}")
-    public @ResponseBody List<RecetasEntity> obtenerRecetasPaciente(@PathVariable int idReceta) {
-        //return recetasRepository.findByIdPaciente(idReceta);
-        return null;
+    public @ResponseBody List<RecetaDto> obtenerRecetasPaciente(@PathVariable int idPaciente) {
+        List<Object[]> infoRecetas=recetasRepository.obtenerRecetasPaciente(idPaciente);
+        return infoRecetas.stream().map((Object[] elemento) -> {
+            Integer idReceta = (Integer) elemento[0];
+            String nombreGenericoMedicamentoPrescrito = (String) elemento[1];
+            String viaCuidadoEspecialesAdministracion = (String) elemento[2];
+            String concentracionDosificacion = (String) elemento[3];
+            String frecuenciaAdministracion24hrs = (String) elemento[4];
+            String duracionTratamiento = elemento[5]+"";
+            Date fechaVencimiento = (Date)elemento[6];
+            String precaucionesEspeciales = (String) elemento[7]+"";
+            String indicacionesEspeciales = (String) elemento[8]+"";
+            Integer idMedico = (Integer) elemento[9];
+            Integer idHistoriaClinica = (Integer) elemento[10];
+            Date createdAt =(Date)elemento[11];
+            Date updatedAt = (Date)elemento[12];
+            String ciPropietario = (String) elemento[13];
+            String pacientePropietario = (String) elemento[14];
+            Date deletedAt = (Date)elemento[15];
+
+            return new RecetaDto(idReceta, nombreGenericoMedicamentoPrescrito, viaCuidadoEspecialesAdministracion,concentracionDosificacion, frecuenciaAdministracion24hrs, duracionTratamiento,fechaVencimiento, precaucionesEspeciales, indicacionesEspeciales, idMedico,idHistoriaClinica, createdAt, updatedAt, ciPropietario, pacientePropietario ,deletedAt);
+        }).collect(Collectors.toList());        //return recetasRepository.findByIdPaciente(idReceta);
+        
     }
     @PostMapping()
     public @ResponseBody String registrarReceta(@RequestBody RecetasEntity nuevo){
