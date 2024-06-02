@@ -112,9 +112,9 @@ public class RecetasController {
         
     }
     @PostMapping()
-    public @ResponseBody String registrarReceta(@RequestBody RecetasEntity nuevo){
+    public @ResponseBody RecetasEntity registrarReceta(@RequestBody RecetasEntity nuevo){
         recetasRepository.save(nuevo);
-        return "Ok";
+        return nuevo;
     }
     @GetMapping("/info-container")
     public @ResponseBody String obtenerInformacionContenedor() {
@@ -136,7 +136,7 @@ public class RecetasController {
                     receta.setIdHistoriaClinica(actualizada.getIdHistoriaClinica());
                     receta.setUpdatedAt(new Date()); 
                     recetasRepository.save(receta);
-                    return "Historia clínica actualizada con éxito";
+                    return "Receta actualizada con éxito";
                 })
                 .orElseGet(() -> {
                     return "Error en la actualizacion";
