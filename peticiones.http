@@ -21,15 +21,15 @@ POST http://localhost:8092/api/microservicio-recetas/recetas
 Content-Type: application/json
 
 {
-    "nombreGenericoMedicamentoPreescrito":"",
-    "viaCuidadoEspecialesAdministracion":"",
+    "nombreGenericoMedicamentoPreescrito":"nombreGenericoMedicamentoPreescrito",
+    "viaCuidadoEspecialesAdministracion":"viaCuidadoEspecialesAdministracion",
     "concentracionDosificacion":"",
     "frecuenciaAdministracion24hrs":"",
-    "idMedico":2,
+    "idMedico":1,
     "idHistoriaClinica":1
 }
 ###
-PUT http://localhost:8092/api/microservicio-recetas/recetas/1
+PUT http://localhost:8092/api/microservicio-recetas/recetas/6
 Content-Type: application/json
 
 {
@@ -37,6 +37,6 @@ Content-Type: application/json
     "viaCuidadoEspecialesAdministracion":"",
     "concentracionDosificacion":"",
     "frecuenciaAdministracion24hrs":"",
-    "idMedico":2,
+    "idMedico":1,
     "idHistoriaClinica":1
 }

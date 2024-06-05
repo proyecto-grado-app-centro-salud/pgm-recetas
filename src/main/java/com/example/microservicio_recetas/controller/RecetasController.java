@@ -121,7 +121,7 @@ public class RecetasController {
         return "microservicio historias clinicas:" + containerMetadataService.retrieveContainerMetadataInfo();
     }
     @PutMapping("/{id}")
-    public @ResponseBody String actualizarReceta(@PathVariable Integer id, @RequestBody RecetasEntity actualizada) {
+    public @ResponseBody RecetasEntity actualizarReceta(@PathVariable Integer id, @RequestBody RecetasEntity actualizada) {
         return recetasRepository.findById(id)
                 .map(receta -> {
                     receta.setNombreGenericoMedicamentoPreescrito(actualizada.getNombreGenericoMedicamentoPreescrito());
@@ -136,10 +136,10 @@ public class RecetasController {
                     receta.setIdHistoriaClinica(actualizada.getIdHistoriaClinica());
                     receta.setUpdatedAt(new Date()); 
                     recetasRepository.save(receta);
-                    return "Receta actualizada con éxito";
+                    return actualizada;
                 })
                 .orElseGet(() -> {
-                    return "Error en la actualizacion";
+                    return actualizada;
                 });
     }
 
