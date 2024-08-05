@@ -29,7 +29,7 @@ Content-Type: application/json
     "idHistoriaClinica":1
 }
 ###
-PUT http://localhost:8092/api/microservicio-recetas/recetas/6
+PUT http://localhost:8092/api/microservicio-recetas/recetas/7
 Content-Type: application/json
 
 {
@@ -37,6 +37,6 @@ Content-Type: application/json
     "viaCuidadoEspecialesAdministracion":"",
     "concentracionDosificacion":"",
     "frecuenciaAdministracion24hrs":"",
-    "idMedico":1,
-    "idHistoriaClinica":1
+    "idMedico":2,
+    "idHistoriaClinica":2
 }
