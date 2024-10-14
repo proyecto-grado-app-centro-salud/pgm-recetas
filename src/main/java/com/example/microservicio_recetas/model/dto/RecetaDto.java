@@ -2,6 +2,8 @@ package com.example.microservicio_recetas.model.dto;
 
 import java.util.Date;
 
+import com.example.microservicio_recetas.model.RecetasEntity;
+
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
@@ -20,13 +22,18 @@ public class RecetaDto {
     private Date fechaVencimiento;
     private String precaucionesEspeciales;
     private String indicacionesEspeciales;
-    private int idMedico;
-    private int idHistoriaClinica;
     private Date createdAt;
     private Date updatedAt;
-    private String ciPropietario;
-    private String pacientePropietario;
     private Date deletedAt;
+    private Integer idHistoriaClinica;
+    private String diagnosticoPresuntivo;
+    private Integer idEspecialidad;
+    private String nombreEspecialidad;
+    private Integer idMedico;
+    private String nombreMedico;
+    private Integer idPaciente;
+    private String pacientePropietario;
+    private String ciPropietario;
     public RecetaDto(Integer idReceta, String nombreGenericoMedicamentoPreescrito,
             String viaCuidadoEspecialesAdministracion, String concentracionDosificacion,
             String frecuenciaAdministracion24hrs, String duracionTratamiento, Date fechaVencimiento,
@@ -48,5 +55,31 @@ public class RecetaDto {
         this.ciPropietario = ciPropietario;
         this.pacientePropietario = pacientePropietario;
         this.deletedAt = deletedAt;
+    }
+
+    public RecetaDto convertirRecetasEntityARecetasDto(RecetasEntity entity) {
+        RecetaDto dto = new RecetaDto();
+        dto.setIdReceta(entity.getIdReceta());
+        dto.setNombreGenericoMedicamentoPreescrito(entity.getNombreGenericoMedicamentoPreescrito());
+        dto.setViaCuidadoEspecialesAdministracion(entity.getViaCuidadoEspecialesAdministracion());
+        dto.setConcentracionDosificacion(entity.getConcentracionDosificacion());
+        dto.setFrecuenciaAdministracion24hrs(entity.getFrecuenciaAdministracion24hrs());
+        dto.setDuracionTratamiento(entity.getDuracionTratamiento());
+        dto.setFechaVencimiento(entity.getFechaVencimiento());
+        dto.setPrecaucionesEspeciales(entity.getPrecaucionesEspeciales());
+        dto.setIndicacionesEspeciales(entity.getIndicacionesEspeciales());
+        dto.setCreatedAt(entity.getCreatedAt());
+        dto.setUpdatedAt(entity.getUpdatedAt());
+        dto.setDeletedAt(entity.getDeletedAt());
+        dto.setIdHistoriaClinica(entity.getHistoriaClinica().getIdHistoriaClinica()); 
+        dto.setDiagnosticoPresuntivo(entity.getHistoriaClinica().getDiagnosticoPresuntivo());
+        dto.setIdEspecialidad(entity.getHistoriaClinica().getEspecialidad().getIdEspecialidad());
+        dto.setNombreEspecialidad(entity.getHistoriaClinica().getEspecialidad().getNombre());
+        dto.setIdPaciente(entity.getHistoriaClinica().getPaciente().getIdUsuario());
+        dto.setPacientePropietario(entity.getHistoriaClinica().getPaciente().getNombres()+" "+entity.getHistoriaClinica().getPaciente().getApellidoPaterno()+" "+entity.getHistoriaClinica().getPaciente().getApellidoMaterno());
+        dto.setCiPropietario(entity.getHistoriaClinica().getPaciente().getCi());
+        dto.setIdMedico(entity.getMedico().getIdUsuario()); 
+        dto.setNombreMedico(entity.getMedico().getNombres()+" "+entity.getMedico().getApellidoPaterno()+" "+entity.getMedico().getApellidoMaterno());
+        return dto;
     }
  }

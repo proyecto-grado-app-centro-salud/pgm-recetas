@@ -1,15 +1,11 @@
 package com.example.microservicio_recetas.model;
 
-import java.util.Date;
-
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
-import jakarta.persistence.FetchType;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
-import jakarta.persistence.JoinColumn;
-import jakarta.persistence.ManyToOne;
 import jakarta.persistence.PrePersist;
 import jakarta.persistence.PreUpdate;
 import jakarta.persistence.Table;
@@ -19,51 +15,64 @@ import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
+import java.util.Date;
 
 @Getter
 @Setter
 @NoArgsConstructor
 @AllArgsConstructor
 @Entity
-@Table(name = "recetas")
-public class RecetasEntity {
+@JsonIgnoreProperties({"hibernateLazyInitializer", "handler"})
+@Table(name = "usuarios")
+public class UsuarioEntity {
+
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    @Column(name = "id_receta")
-    private int idReceta;
+    @Column(name = "id_usuario")
+    private int idUsuario;
 
-    @Column(name = "nombre_generico_medicamento_preescrito")
-    private String nombreGenericoMedicamentoPreescrito;
+    @Column(name = "nombres")
+    private String nombres;
 
-    @Column(name = "via_cuidado_especiales_administracion")
-    private String viaCuidadoEspecialesAdministracion;
+    @Column(name = "ci")
+    private String ci;
 
-    @Column(name = "concentracion_dosificacion")
-    private String concentracionDosificacion;
+    @Column(name = "direccion")
+    private String direccion;
 
-    @Column(name = "frecuencia_administracion_24hrs")
-    private String frecuenciaAdministracion24hrs;
+    @Column(name = "celular")
+    private String celular;
 
-    @Column(name = "duracion_tratamiento")
-    private String duracionTratamiento;
+    @Column(name = "email")
+    private String email;
 
-    @Column(name = "fecha_vencimiento")
+    @Column(name = "grupo_sanguineo")
+    private String grupoSanguineo;
+
+    @Column(name = "apellido_paterno")
+    private String apellidoPaterno;
+
+    @Column(name = "apellido_materno")
+    private String apellidoMaterno;
+
     @Temporal(TemporalType.DATE)
-    private Date fechaVencimiento;
+    @Column(name = "fecha_nacimiento")
+    private Date fechaNacimiento;
 
-    @Column(name = "precauciones_especiales")
-    private String precaucionesEspeciales;
+    @Column(name = "sexo")
+    private String sexo;
 
-    @Column(name = "indicaciones_especiales")
-    private String indicacionesEspeciales;
+    @Column(name = "estado_civil")
+    private String estadoCivil;
 
-    @ManyToOne(fetch = FetchType.LAZY)
-    @JoinColumn(name = "id_medico", nullable = false)
-    private UsuarioEntity medico;
-    
-    @ManyToOne(fetch = FetchType.LAZY)
-    @JoinColumn(name = "id_historia_clinica", nullable = false)
-    private HistoriaClinicaEntity historiaClinica;
+    @Column(name = "edad")
+    private Integer edad;
+
+    @Column(name = "dias_sancion_peticion_ficha_presencial")
+    private Integer diasSancionPeticionFichaPresencial;
+
+    @Column(name = "telefono")
+    private String telefono;
 
     @Temporal(TemporalType.TIMESTAMP)
     @Column(name = "created_at", nullable = false, updatable = false)

@@ -2,6 +2,8 @@ package com.example.microservicio_recetas.model;
 
 import java.util.Date;
 
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
+
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.FetchType;
@@ -19,52 +21,55 @@ import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
-
 @Getter
 @Setter
 @NoArgsConstructor
 @AllArgsConstructor
 @Entity
-@Table(name = "recetas")
-public class RecetasEntity {
+@JsonIgnoreProperties({"hibernateLazyInitializer", "handler"})
+@Table(name = "historias_clinicas")
+public class HistoriaClinicaEntity {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    @Column(name = "id_receta")
-    private int idReceta;
+    @Column(name = "id_historia_clinica")
+    private int idHistoriaClinica;
+    @Column(name = "condiciones_actuales_estado_salud_enfermedad")
+    private String amnesis;
+    @Column(name = "antecedentes_familiares")
+    private String antecedentesFamiliares;
+    @Column(name = "antecedentes_ginecoobstetricos")
+    private String antecedentesGinecoobstetricos;
+    @Column(name = "antecedentes_no_patologicos")
+    private String antecedentesNoPatologicos;
+    @Column(name = "antecedentes_patologicos")
+    private String antecedentesPatologicos;
+    @Column(name = "antecedentes_personales")
+    private String antecedentesPersonales;
+    @Column(name = "diagnostico_presuntivo")
+    private String diagnosticoPresuntivo;
+    @Column(name = "diagnosticos_diferenciales")
+    private String diagnosticosDiferenciales;
+    @Column(name = "examen_fisico_general")
+    private String examenFisico;
+    @Column(name = "examen_fisico_especial")
+    private String examenFisicoEspecial;
+    @Column(name = "propuesta_basica_de_conducta")
+    private String propuestaBasicaDeConducta;
+    @Column(name = "tratamiento")
+    private String tratamiento;
 
-    @Column(name = "nombre_generico_medicamento_preescrito")
-    private String nombreGenericoMedicamentoPreescrito;
-
-    @Column(name = "via_cuidado_especiales_administracion")
-    private String viaCuidadoEspecialesAdministracion;
-
-    @Column(name = "concentracion_dosificacion")
-    private String concentracionDosificacion;
-
-    @Column(name = "frecuencia_administracion_24hrs")
-    private String frecuenciaAdministracion24hrs;
-
-    @Column(name = "duracion_tratamiento")
-    private String duracionTratamiento;
-
-    @Column(name = "fecha_vencimiento")
-    @Temporal(TemporalType.DATE)
-    private Date fechaVencimiento;
-
-    @Column(name = "precauciones_especiales")
-    private String precaucionesEspeciales;
-
-    @Column(name = "indicaciones_especiales")
-    private String indicacionesEspeciales;
+    @ManyToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name = "id_paciente", nullable = false)
+    private UsuarioEntity paciente;
 
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "id_medico", nullable = false)
     private UsuarioEntity medico;
     
     @ManyToOne(fetch = FetchType.LAZY)
-    @JoinColumn(name = "id_historia_clinica", nullable = false)
-    private HistoriaClinicaEntity historiaClinica;
-
+    @JoinColumn(name = "id_especialidad", nullable = false)
+    private EspecialidadesEntity especialidad;
+  
     @Temporal(TemporalType.TIMESTAMP)
     @Column(name = "created_at", nullable = false, updatable = false)
     private Date createdAt;
@@ -91,4 +96,5 @@ public class RecetasEntity {
     public void markAsDeleted() {
         deletedAt = new Date();
     }
+
 }

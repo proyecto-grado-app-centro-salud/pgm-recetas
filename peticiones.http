@@ -11,7 +11,7 @@ GET http://localhost:8092/api/microservicio-recetas/recetas
 
 
 ###
-GET http://localhost:8092/api/microservicio-recetas/recetas/paciente/1
+GET http://localhost:8092/api/microservicio-recetas/recetas/paciente/2
 
 ###
 GET http://localhost:8092/api/microservicio-recetas/recetas/info-container
