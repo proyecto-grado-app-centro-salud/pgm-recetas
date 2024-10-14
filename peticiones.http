@@ -29,7 +29,7 @@ Content-Type: application/json
     "idHistoriaClinica":1
 }
 ###
-PUT http://localhost:8092/api/microservicio-recetas/recetas/7
+PUT http://localhost:8092/api/microservicio-recetas/recetas/6
 Content-Type: application/json
 
 {
