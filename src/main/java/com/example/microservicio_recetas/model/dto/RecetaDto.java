@@ -13,7 +13,7 @@ import lombok.Setter;
 @Setter
 @NoArgsConstructor
 public class RecetaDto {
-    private Integer idReceta;
+    private Integer id;
     private String nombreGenericoMedicamentoPreescrito;
     private String viaCuidadoEspecialesAdministracion;
     private String concentracionDosificacion;
@@ -39,7 +39,7 @@ public class RecetaDto {
             String frecuenciaAdministracion24hrs, String duracionTratamiento, Date fechaVencimiento,
             String precaucionesEspeciales, String indicacionesEspeciales, int idMedico, int idHistoriaClinica,
             Date createdAt, Date updatedAt, String ciPropietario, String pacientePropietario, Date deletedAt) {
-        this.idReceta = idReceta;
+        this.id = idReceta;
         this.nombreGenericoMedicamentoPreescrito = nombreGenericoMedicamentoPreescrito;
         this.viaCuidadoEspecialesAdministracion = viaCuidadoEspecialesAdministracion;
         this.concentracionDosificacion = concentracionDosificacion;
@@ -59,7 +59,7 @@ public class RecetaDto {
 
     public RecetaDto convertirRecetasEntityARecetasDto(RecetasEntity entity) {
         RecetaDto dto = new RecetaDto();
-        dto.setIdReceta(entity.getIdReceta());
+        dto.setId(entity.getIdReceta());
         dto.setNombreGenericoMedicamentoPreescrito(entity.getNombreGenericoMedicamentoPreescrito());
         dto.setViaCuidadoEspecialesAdministracion(entity.getViaCuidadoEspecialesAdministracion());
         dto.setConcentracionDosificacion(entity.getConcentracionDosificacion());
