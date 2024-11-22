@@ -9,6 +9,9 @@ import com.example.microservicio_recetas.services.ContainerMetadataService;
 import com.example.microservicio_recetas.services.RecetasService;
 import com.example.microservicio_recetas.model.dto.RecetaDto;
 
+import java.nio.file.Files;
+import java.nio.file.Path;
+import java.nio.file.Paths;
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
 import java.util.Date;
@@ -16,6 +19,7 @@ import java.util.List;
 import java.util.stream.Collectors;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpHeaders;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.CrossOrigin;
@@ -54,6 +58,7 @@ public class RecetasController {
             List<RecetaDto> recetas = recetasService.obtenerTodasRecetas();
             return new ResponseEntity<>(recetas, HttpStatus.OK);
         } catch (Exception e) {
+            e.printStackTrace();
             return new ResponseEntity<>(HttpStatus.INTERNAL_SERVER_ERROR);
         }
     }
@@ -77,7 +82,22 @@ public class RecetasController {
             return new ResponseEntity<>(HttpStatus.INTERNAL_SERVER_ERROR);
         }
     }
+    @GetMapping("/pdf")
+    public ResponseEntity<byte[]> obtenerPDFDeReceta(RecetaDto recetaDto) {
+        try {
+            byte[] pdfBytes = recetasService.obtenerPDFReceta(recetaDto);
+            
+            HttpHeaders headers = new HttpHeaders();
+            headers.add("Content-Disposition", "inline; filename=Receta.pdf");
+            headers.add("Content-Type", "application/pdf");
+            headers.add("Content-Length", "" + pdfBytes.length);
 
+            return new ResponseEntity<>(pdfBytes, headers, HttpStatus.OK);
+        } catch (Exception e) {
+            e.printStackTrace();
+            return new ResponseEntity<>( HttpStatus.NOT_FOUND);
+        }
+    }
     
 
  

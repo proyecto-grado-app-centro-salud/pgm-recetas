@@ -24,6 +24,8 @@ public class RecetasService {
     @Autowired
     private HistoriaClinicaRepositoryJPA historiaClinicaRepositoryJPA;
 
+    @Autowired
+    PDFService pdfService;
     public RecetaDto registrarReceta(RecetaDto recetasDto) {
         UsuarioEntity medicoEntity = usuariosRepositoryJPA.findById(recetasDto.getIdMedico())
                 .orElseThrow(() -> new RuntimeException("Médico no encontrado"));
@@ -93,5 +95,15 @@ public class RecetasService {
         return recetas.stream()
                     .map(receta -> new RecetaDto().convertirRecetasEntityARecetasDto(receta))
                     .toList();
+    }
+
+    public byte[] obtenerPDFReceta(RecetaDto recetaDto) {
+        try 
+        {
+                return pdfService.generarPdfReporteReceta(recetaDto);
+            } catch (Exception e) {
+                e.printStackTrace();
+                throw new RuntimeException("Error al generar el PDF.", e);
+            }
     }
 }
