@@ -1,8 +1,13 @@
 package com.example.microservicio_recetas.services;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.PageRequest;
+import org.springframework.data.domain.Pageable;
+import org.springframework.data.jpa.domain.Specification;
 import org.springframework.stereotype.Service;
 
 import com.example.microservicio_recetas.model.HistoriaClinicaEntity;
@@ -12,6 +17,7 @@ import com.example.microservicio_recetas.model.dto.RecetaDto;
 import com.example.microservicio_recetas.repository.HistoriaClinicaRepositoryJPA;
 import com.example.microservicio_recetas.repository.RecetasRepository;
 import com.example.microservicio_recetas.repository.UsuariosRepositoryJPA;
+import com.example.microservicio_recetas.util.RecetasSpecification;
 
 @Service
 public class RecetasService {
@@ -26,6 +32,9 @@ public class RecetasService {
 
     @Autowired
     PDFService pdfService;
+
+    @Autowired
+    private ConvertirTiposDatosService convertirTiposDatosService;
     public RecetaDto registrarReceta(RecetaDto recetasDto) {
         UsuarioEntity medicoEntity = usuariosRepositoryJPA.findById(recetasDto.getIdMedico())
                 .orElseThrow(() -> new RuntimeException("Médico no encontrado"));
@@ -50,12 +59,19 @@ public class RecetasService {
         return new RecetaDto().convertirRecetasEntityARecetasDto(recetaEntity);
     }
 
-    public List<RecetaDto> obtenerTodasRecetas() {
-        List<RecetasEntity> recetas = recetasRepository.findAll();
-        return recetas.stream()
-                .map(receta -> new RecetaDto().convertirRecetasEntityARecetasDto(receta))
-                .toList();
-
+    public List<RecetaDto> obtenerTodasRecetas(String fechaInicio, String fechaFin, String ciPaciente, String nombrePaciente, String nombreMedico, String nombreEspecialidad, String diagnosticoPresuntivo, Integer page, Integer size) {
+        List<RecetasEntity> recetasEntities = new ArrayList<>();
+        Specification<RecetasEntity> spec = Specification.where(RecetasSpecification.obtenerRecetasPorParametros(convertirTiposDatosService.convertirStringADate(fechaInicio),convertirTiposDatosService.convertirStringADate(fechaFin),ciPaciente,nombrePaciente,nombreMedico,nombreEspecialidad,diagnosticoPresuntivo));
+        if(page!=null && size!=null){
+            Pageable pageable = PageRequest.of(page, size);
+            Page<RecetasEntity> recetasEntitiesPage=recetasRepository.findAll(spec,pageable);
+            recetasEntities=recetasEntitiesPage.getContent();
+        }else{
+            recetasEntities=recetasRepository.findAll(spec);
+        }  
+        return recetasEntities.stream()
+                    .map(receta -> new RecetaDto().convertirRecetasEntityARecetasDto(receta))
+                    .toList();
     }
 
     public RecetaDto obtenerRecetaPorId(Integer id) {
@@ -90,9 +106,17 @@ public class RecetasService {
         return new RecetaDto().convertirRecetasEntityARecetasDto(recetaEntity);
     }
 
-    public List<RecetaDto> obtenerTodasRecetasDePaciente(int idPaciente) {
-        List<RecetasEntity> recetas = recetasRepository.obtenerNotasEvolucionPaciente(idPaciente);
-        return recetas.stream()
+    public List<RecetaDto> obtenerTodasRecetasDePaciente(int idPaciente, String fechaInicio, String fechaFin, String nombreMedico, String nombreEspecialidad, String diagnosticoPresuntivo, Integer page, Integer size) {
+        List<RecetasEntity> recetasEntities = new ArrayList<>();
+        Specification<RecetasEntity> spec = Specification.where(RecetasSpecification.obtenerRecetasDePacientePorParametros(idPaciente,convertirTiposDatosService.convertirStringADate(fechaInicio),convertirTiposDatosService.convertirStringADate(fechaFin),nombreMedico,nombreEspecialidad,diagnosticoPresuntivo));
+        if(page!=null && size!=null){
+            Pageable pageable = PageRequest.of(page, size);
+            Page<RecetasEntity> recetasEntitiesPage=recetasRepository.findAll(spec,pageable);
+            recetasEntities=recetasEntitiesPage.getContent();
+        }else{
+            recetasEntities=recetasRepository.findAll(spec);
+        }  
+        return recetasEntities.stream()
                     .map(receta -> new RecetaDto().convertirRecetasEntityARecetasDto(receta))
                     .toList();
     }

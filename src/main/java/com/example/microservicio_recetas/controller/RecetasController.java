@@ -30,7 +30,7 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
-
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 
 
@@ -53,9 +53,9 @@ public class RecetasController {
     }
 
     @GetMapping
-    public ResponseEntity<List<RecetaDto>> obtenerTodasRecetas() {
+    public ResponseEntity<List<RecetaDto>> obtenerTodasRecetas(@RequestParam(required = false) String fechaInicio, @RequestParam(required = false) String fechaFin,@RequestParam(required = false) String ciPaciente,@RequestParam(required = false) String nombrePaciente,@RequestParam(required = false) String nombreMedico,@RequestParam(required = false) String nombreEspecialidad,@RequestParam(required = false) String diagnosticoPresuntivo,@RequestParam(required = false) Integer page,@RequestParam(required = false) Integer size) {
         try {
-            List<RecetaDto> recetas = recetasService.obtenerTodasRecetas();
+            List<RecetaDto> recetas = recetasService.obtenerTodasRecetas(fechaInicio,fechaFin,ciPaciente,nombrePaciente,nombreMedico,nombreEspecialidad,diagnosticoPresuntivo,page,size);
             return new ResponseEntity<>(recetas, HttpStatus.OK);
         } catch (Exception e) {
             e.printStackTrace();
@@ -102,9 +102,9 @@ public class RecetasController {
 
  
     @GetMapping("/paciente/{idPaciente}")
-    public ResponseEntity<List<RecetaDto>> obtenerRecetasPaciente(@PathVariable int idPaciente) {
+    public ResponseEntity<List<RecetaDto>> obtenerRecetasPaciente(@PathVariable int idPaciente,@RequestParam(required = false) String fechaInicio, @RequestParam(required = false) String fechaFin,@RequestParam(required = false) String nombreMedico,@RequestParam(required = false) String nombreEspecialidad,@RequestParam(required = false) String diagnosticoPresuntivo,@RequestParam(required = false) Integer page,@RequestParam(required = false) Integer size) {
         try {
-            List<RecetaDto> recetas = recetasService.obtenerTodasRecetasDePaciente(idPaciente);
+            List<RecetaDto> recetas = recetasService.obtenerTodasRecetasDePaciente(idPaciente,fechaInicio,fechaFin,nombreMedico,nombreEspecialidad,diagnosticoPresuntivo,page,size);
             return new ResponseEntity<>(recetas, HttpStatus.OK);
         } catch (Exception e) {
             return new ResponseEntity<>(HttpStatus.NOT_FOUND);
