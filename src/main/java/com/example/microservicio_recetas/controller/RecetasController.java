@@ -19,6 +19,7 @@ import java.util.List;
 import java.util.stream.Collectors;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Page;
 import org.springframework.http.HttpHeaders;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -48,14 +49,15 @@ public class RecetasController {
             RecetaDto nuevaReceta = recetasService.registrarReceta(recetaDto);
             return new ResponseEntity<>(nuevaReceta, HttpStatus.CREATED);
         } catch (Exception e) {
+            e.printStackTrace();
             return new ResponseEntity<>(HttpStatus.INTERNAL_SERVER_ERROR);
         }
     }
 
     @GetMapping
-    public ResponseEntity<List<RecetaDto>> obtenerTodasRecetas(@RequestParam(required = false) String fechaInicio, @RequestParam(required = false) String fechaFin,@RequestParam(required = false) String ciPaciente,@RequestParam(required = false) String nombrePaciente,@RequestParam(required = false) String nombreMedico,@RequestParam(required = false) String nombreEspecialidad,@RequestParam(required = false) String diagnosticoPresuntivo,@RequestParam(required = false) Integer page,@RequestParam(required = false) Integer size) {
+    public ResponseEntity<Page<RecetaDto>> obtenerTodasRecetas(@RequestParam(required = false) String fechaInicio, @RequestParam(required = false) String fechaFin,@RequestParam(required = false) String ciPaciente,@RequestParam(required = false) String nombrePaciente,@RequestParam(required = false) String nombreMedico,@RequestParam(required = false) String nombreEspecialidad,@RequestParam(required = false) String diagnosticoPresuntivo,@RequestParam(required = false) Integer page,@RequestParam(required = false) Integer size) {
         try {
-            List<RecetaDto> recetas = recetasService.obtenerTodasRecetas(fechaInicio,fechaFin,ciPaciente,nombrePaciente,nombreMedico,nombreEspecialidad,diagnosticoPresuntivo,page,size);
+            Page<RecetaDto> recetas = recetasService.obtenerTodasRecetas(fechaInicio,fechaFin,ciPaciente,nombrePaciente,nombreMedico,nombreEspecialidad,diagnosticoPresuntivo,page,size);
             return new ResponseEntity<>(recetas, HttpStatus.OK);
         } catch (Exception e) {
             e.printStackTrace();
@@ -69,6 +71,7 @@ public class RecetasController {
             RecetaDto receta = recetasService.obtenerRecetaPorId(id);
             return new ResponseEntity<>(receta, HttpStatus.OK);
         } catch (Exception e) {
+            e.printStackTrace();
             return new ResponseEntity<>(HttpStatus.NOT_FOUND);
         }
     }
@@ -79,11 +82,12 @@ public class RecetasController {
             RecetaDto recetaActualizada = recetasService.actualizarReceta(id, recetaDto);
             return new ResponseEntity<>(recetaActualizada, HttpStatus.OK);
         } catch (Exception e) {
+            e.printStackTrace();
             return new ResponseEntity<>(HttpStatus.INTERNAL_SERVER_ERROR);
         }
     }
-    @GetMapping("/pdf")
-    public ResponseEntity<byte[]> obtenerPDFDeReceta(RecetaDto recetaDto) {
+    @PostMapping("/pdf")
+    public ResponseEntity<byte[]> obtenerPDFDeReceta(@RequestBody RecetaDto recetaDto) {
         try {
             byte[] pdfBytes = recetasService.obtenerPDFReceta(recetaDto);
             
@@ -102,11 +106,12 @@ public class RecetasController {
 
  
     @GetMapping("/paciente/{idPaciente}")
-    public ResponseEntity<List<RecetaDto>> obtenerRecetasPaciente(@PathVariable int idPaciente,@RequestParam(required = false) String fechaInicio, @RequestParam(required = false) String fechaFin,@RequestParam(required = false) String nombreMedico,@RequestParam(required = false) String nombreEspecialidad,@RequestParam(required = false) String diagnosticoPresuntivo,@RequestParam(required = false) Integer page,@RequestParam(required = false) Integer size) {
+    public ResponseEntity<Page<RecetaDto>> obtenerRecetasPaciente(@PathVariable int idPaciente,@RequestParam(required = false) String fechaInicio, @RequestParam(required = false) String fechaFin,@RequestParam(required = false) String nombreMedico,@RequestParam(required = false) String nombreEspecialidad,@RequestParam(required = false) String diagnosticoPresuntivo,@RequestParam(required = false) Integer page,@RequestParam(required = false) Integer size) {
         try {
-            List<RecetaDto> recetas = recetasService.obtenerTodasRecetasDePaciente(idPaciente,fechaInicio,fechaFin,nombreMedico,nombreEspecialidad,diagnosticoPresuntivo,page,size);
+            Page<RecetaDto> recetas = recetasService.obtenerTodasRecetasDePaciente(idPaciente,fechaInicio,fechaFin,nombreMedico,nombreEspecialidad,diagnosticoPresuntivo,page,size);
             return new ResponseEntity<>(recetas, HttpStatus.OK);
         } catch (Exception e) {
+            e.printStackTrace();
             return new ResponseEntity<>(HttpStatus.NOT_FOUND);
         }
         
@@ -116,5 +121,14 @@ public class RecetasController {
         return "microservicio historias clinicas:" + containerMetadataService.retrieveContainerMetadataInfo();
     }
    
-
+    @DeleteMapping(value = "/{id}")
+    public ResponseEntity<Void> delete(@PathVariable int id) {
+        try{
+            recetasService.delete(id);
+            return new ResponseEntity<>(HttpStatus.OK);
+        } catch (Exception e) {
+            e.printStackTrace();
+            return new ResponseEntity<>(HttpStatus.INTERNAL_SERVER_ERROR);
+        }
+    }
 }

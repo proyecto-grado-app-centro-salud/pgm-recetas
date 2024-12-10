@@ -11,6 +11,7 @@ import lombok.Setter;
 
 @Getter
 @Setter
+@AllArgsConstructor
 @NoArgsConstructor
 public class RecetaDto {
     private Integer id;
@@ -22,6 +23,8 @@ public class RecetaDto {
     private Date fechaVencimiento;
     private String precaucionesEspeciales;
     private String indicacionesEspeciales;
+    private Double cantidadRecetada;
+    private Double cantidadDispensada;
     private Date createdAt;
     private Date updatedAt;
     private Date deletedAt;
@@ -57,7 +60,7 @@ public class RecetaDto {
         this.deletedAt = deletedAt;
     }
 
-    public RecetaDto convertirRecetasEntityARecetasDto(RecetasEntity entity) {
+    public static RecetaDto convertirRecetasEntityARecetasDto(RecetasEntity entity) {
         RecetaDto dto = new RecetaDto();
         dto.setId(entity.getIdReceta());
         dto.setNombreGenericoMedicamentoPreescrito(entity.getNombreGenericoMedicamentoPreescrito());
@@ -68,6 +71,8 @@ public class RecetaDto {
         dto.setFechaVencimiento(entity.getFechaVencimiento());
         dto.setPrecaucionesEspeciales(entity.getPrecaucionesEspeciales());
         dto.setIndicacionesEspeciales(entity.getIndicacionesEspeciales());
+        dto.setCantidadRecetada(entity.getCantidadRecetada());
+        dto.setCantidadDispensada(entity.getCantidadDispensada());
         dto.setCreatedAt(entity.getCreatedAt());
         dto.setUpdatedAt(entity.getUpdatedAt());
         dto.setDeletedAt(entity.getDeletedAt());

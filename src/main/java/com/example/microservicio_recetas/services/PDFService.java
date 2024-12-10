@@ -73,7 +73,9 @@ public class PDFService {
         parameters.put("frecuenciaAdministracion24hrs",recetaDto.getFrecuenciaAdministracion24hrs());
         parameters.put("duracionTratamiento",recetaDto.getDuracionTratamiento() );
         parameters.put("precaucionesEspeciales",recetaDto.getPrecaucionesEspeciales());
-        parameters.put("indicacionesEspeciales",recetaDto.getIndicacionesEspeciales() );
+        parameters.put("indicacionesEspeciales",recetaDto.getIndicacionesEspeciales());
+        parameters.put("cantidadRecetada",recetaDto.getCantidadRecetada()+"");
+        parameters.put("cantidadSuministrada",recetaDto.getCantidadDispensada()+"");
        
         parameters.put("apellidoPaterno", pacienteEntity.getApellidoPaterno());
         parameters.put("apellidoMaterno", pacienteEntity.getApellidoMaterno());

@@ -1,6 +1,7 @@
 package com.example.microservicio_recetas.repository;
 
 import java.util.List;
+import java.util.Optional;
 
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.JpaSpecificationExecutor;
@@ -34,4 +35,6 @@ public interface RecetasRepository extends JpaRepository<RecetasEntity, Integer>
     + "JOIN hc.paciente p "
     + "WHERE p.idUsuario = :idPaciente")
     List<RecetasEntity> obtenerNotasEvolucionPaciente(@Param("idPaciente") int idPaciente);
+    Optional<RecetasEntity> findByIdRecetaAndDeletedAtIsNull(int idReceta);
+
 }

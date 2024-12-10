@@ -4,7 +4,7 @@ GET http://localhost:8092/api/microservicio-recetas/manage/health
 
 
 ###
-GET http://localhost:8092/api/microservicio-recetas/recetas/1
+GET http://localhost:8092/api/microservicio-recetas/recetas
 
 ###
 GET http://localhost:9004/api/microservicio-examenes-complementarios/examenes-complementarios
@@ -39,4 +39,17 @@ Content-Type: application/json
     "frecuenciaAdministracion24hrs":"",
     "idMedico":2,
     "idHistoriaClinica":2
+}
+
+###
+GET http://localhost:8092/api/microservicio-recetas/recetas/pdf
+Content-Type: application/json
+
+{
+    "nombreGenericoMedicamentoPreescrito":"nombreGenericoMedicamentoPreescrito",
+    "viaCuidadoEspecialesAdministracion":"viaCuidadoEspecialesAdministracion",
+    "concentracionDosificacion":"concentracionDosificacion",
+    "frecuenciaAdministracion24hrs":"frecuenciaAdministracion24hrs",
+    "idMedico":8490543,
+    "idHistoriaClinica":1
 }

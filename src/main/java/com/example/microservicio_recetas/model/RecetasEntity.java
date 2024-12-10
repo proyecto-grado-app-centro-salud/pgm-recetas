@@ -57,6 +57,12 @@ public class RecetasEntity {
     @Column(name = "indicaciones_especiales")
     private String indicacionesEspeciales;
 
+    @Column(name = "cantidad_recetada")
+    private Double cantidadRecetada;
+
+    @Column(name = "cantidad_dispensada")
+    private Double cantidadDispensada;
+
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "id_medico", nullable = false)
     private UsuarioEntity medico;

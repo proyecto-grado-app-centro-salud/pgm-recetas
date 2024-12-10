@@ -10,8 +10,6 @@
 	<parameter name="precaucionesEspeciales" class="java.lang.String"/>
 	<parameter name="indicacionesEspeciales" class="java.lang.String"/>
 	<parameter name="fechaVencimiento" class="java.lang.String"/>
-	<parameter name="cantidadRecetada" class="java.lang.String"/>
-	<parameter name="cantidadSuministrada" class="java.lang.String"/>
 	<parameter name="apellidoPaterno" class="java.lang.String"/>
 	<parameter name="apellidoMaterno" class="java.lang.String"/>
 	<parameter name="nombres" class="java.lang.String"/>
@@ -153,7 +151,7 @@
 				<pen lineWidth="2.0"/>
 			</element>
 		</band>
-		<band height="418">
+		<band height="486">
 			<element kind="staticText" uuid="69807dce-685d-4085-9557-6c1505a09f10" stretchType="ElementGroupHeight" x="0" y="0" width="515" height="16" fontSize="12.0" bold="true" hTextAlign="Center" vTextAlign="Middle">
 				<text><![CDATA[RECETA]]></text>
 				<property name="com.jaspersoft.studio.unit.height" value="pixel"/>
@@ -221,33 +219,7 @@
 				<property name="com.jaspersoft.studio.unit.y" value="px"/>
 				<box padding="2"/>
 			</element>
-			<element kind="staticText" uuid="4e8805bc-67f1-4b50-803d-e5f0961856d3" x="0" y="282" width="515" height="14" bold="true" vTextAlign="Middle">
-				<text><![CDATA[Fecha vencimiento]]></text>
-				<property name="com.jaspersoft.studio.unit.y" value="pixel"/>
-			</element>
-			<element kind="textField" uuid="b58066cd-1c76-4e8f-b5ae-fa18aee77d6f" x="0" y="296" width="515" height="24">
-				<expression><![CDATA[$P{fechaVencimiento}]]></expression>
-				<property name="com.jaspersoft.studio.unit.y" value="px"/>
-				<box padding="2"/>
-			</element>
-			<element kind="staticText" uuid="fbc4adb2-bb03-462c-a48f-6fcff500c4bb" x="0" y="320" width="515" height="14" bold="true" vTextAlign="Middle">
-				<text><![CDATA[Cantidad recetada]]></text>
-				<property name="com.jaspersoft.studio.unit.y" value="pixel"/>
-			</element>
-			<element kind="textField" uuid="66e59ba8-8ce0-425e-95b7-294fad32c92a" x="0" y="334" width="515" height="24">
-				<expression><![CDATA[$P{cantidadRecetada}]]></expression>
-				<property name="com.jaspersoft.studio.unit.y" value="px"/>
-				<box padding="2"/>
-			</element>
-			<element kind="staticText" uuid="e9fbba72-6561-48d1-8264-4e68674996c1" x="0" y="358" width="515" height="14" bold="true" vTextAlign="Middle">
-				<text><![CDATA[Cantidad dispensada]]></text>
-				<property name="com.jaspersoft.studio.unit.y" value="pixel"/>
-			</element>
-			<element kind="textField" uuid="4fd942bb-9966-451a-9204-6dac8ac4854c" x="0" y="372" width="515" height="24">
-				<expression><![CDATA[$P{cantidadSuministrada}]]></expression>
-				<property name="com.jaspersoft.studio.unit.y" value="px"/>
-				<box padding="2"/>
-			</element>
+			
 			<property name="com.jaspersoft.studio.layout" value="com.jaspersoft.studio.editor.layout.FreeLayout"/>
 		</band>
 		<band height="54">
