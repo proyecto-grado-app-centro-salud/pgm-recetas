@@ -1,6 +1,7 @@
 package com.example.microservicio_recetas.services;
 
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -19,6 +20,8 @@ import com.example.microservicio_recetas.repository.RecetasRepository;
 import com.example.microservicio_recetas.repository.UsuariosRepositoryJPA;
 import com.example.microservicio_recetas.util.RecetasSpecification;
 
+import jakarta.transaction.Transactional;
+
 @Service
 public class RecetasService {
       @Autowired
@@ -36,10 +39,10 @@ public class RecetasService {
     @Autowired
     private ConvertirTiposDatosService convertirTiposDatosService;
     public RecetaDto registrarReceta(RecetaDto recetasDto) {
-        UsuarioEntity medicoEntity = usuariosRepositoryJPA.findById(recetasDto.getIdMedico())
+        UsuarioEntity medicoEntity = usuariosRepositoryJPA.findByIdUsuarioAndDeletedAtIsNull(recetasDto.getIdMedico())
                 .orElseThrow(() -> new RuntimeException("Médico no encontrado"));
 
-        HistoriaClinicaEntity historiaClinicaEntity = historiaClinicaRepositoryJPA.findById(recetasDto.getIdHistoriaClinica())
+        HistoriaClinicaEntity historiaClinicaEntity = historiaClinicaRepositoryJPA.findByIdHistoriaClinicaAndDeletedAtIsNull(recetasDto.getIdHistoriaClinica())
                 .orElseThrow(() -> new RuntimeException("Historia clínica no encontrada"));
 
         RecetasEntity recetaEntity = new RecetasEntity();
@@ -83,10 +86,10 @@ public class RecetasService {
         RecetasEntity recetaEntity = recetasRepository.findByIdRecetaAndDeletedAtIsNull(idReceta)
                 .orElseThrow(() -> new RuntimeException("Receta no encontrada"));
 
-        UsuarioEntity medicoEntity = usuariosRepositoryJPA.findById(recetaDto.getIdMedico())
+        UsuarioEntity medicoEntity = usuariosRepositoryJPA.findByIdUsuarioAndDeletedAtIsNull(recetaDto.getIdMedico())
                 .orElseThrow(() -> new RuntimeException("Médico no encontrado"));
 
-        HistoriaClinicaEntity historiaClinicaEntity = historiaClinicaRepositoryJPA.findById(recetaDto.getIdHistoriaClinica())
+        HistoriaClinicaEntity historiaClinicaEntity = historiaClinicaRepositoryJPA.findByIdHistoriaClinicaAndDeletedAtIsNull(recetaDto.getIdHistoriaClinica())
                 .orElseThrow(() -> new RuntimeException("Historia clínica no encontrada"));
 
         recetaEntity.setNombreGenericoMedicamentoPreescrito(recetaDto.getNombreGenericoMedicamentoPreescrito());
@@ -135,5 +138,10 @@ public class RecetasService {
         recetaEntity.markAsDeleted();
         recetasRepository.save(recetaEntity);
 
+    }
+
+    @Transactional
+    public void deleteRecetasDeHistoriaClinica(int idHistoriaClinica) {
+        recetasRepository.markAsDeletedAllRecetasFromHistoriaClinica(idHistoriaClinica,new Date());
     }
 }

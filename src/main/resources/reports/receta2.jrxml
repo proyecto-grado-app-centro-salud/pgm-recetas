@@ -29,6 +29,9 @@
 	<parameter name="nombreCompletoPaciente" class="java.lang.String"/>
 	<detail>
 		<band height="36">
+			<element kind="image" uuid="c970f5b3-f369-416e-a84b-31ce175149a3" x="445" y="0" width="35" height="30">
+				<expression><![CDATA[$P{IMAGE_PATH}]]></expression>
+			</element>
 			<element kind="staticText" uuid="10563923-6b66-43f5-a075-411f5e6b111c" x="0" y="0" width="360" height="30" fontSize="12.0" hTextAlign="Left" vTextAlign="Middle">
 				<text><![CDATA[HOSPITAL CLINICO]]></text>
 			</element>
@@ -151,96 +154,96 @@
 			</element>
 		</band>
 		<band height="418">
-			<element kind="staticText" uuid="69807dce-685d-4085-9557-6c1505a09f10" positionType="Float" stretchType="NoStretch" x="0" y="0" width="515" height="16" fontSize="12.0" bold="true" hTextAlign="Center" vTextAlign="Middle">
+			<element kind="staticText" uuid="69807dce-685d-4085-9557-6c1505a09f10" stretchType="ElementGroupHeight" x="0" y="0" width="515" height="16" fontSize="12.0" bold="true" hTextAlign="Center" vTextAlign="Middle">
 				<text><![CDATA[RECETA]]></text>
 				<property name="com.jaspersoft.studio.unit.height" value="pixel"/>
 			</element>
-			<element kind="staticText" uuid="f198ee49-d918-495f-88ed-81a814c49424" positionType="Float" x="0" y="16" width="515" height="14" bold="true" vTextAlign="Middle">
+			<element kind="staticText" uuid="f198ee49-d918-495f-88ed-81a814c49424" x="0" y="16" width="515" height="14" bold="true" vTextAlign="Middle">
 				<text><![CDATA[Nombre generico medicamento preescrito]]></text>
 				<property name="com.jaspersoft.studio.unit.height" value="px"/>
 			</element>
-			<element kind="textField" uuid="86c838e0-48c0-41b8-a974-0ea88b6dff9d" positionType="Float" x="0" y="30" width="515" height="24" textAdjust="StretchHeight">
+			<element kind="textField" uuid="86c838e0-48c0-41b8-a974-0ea88b6dff9d" x="0" y="30" width="515" height="24">
 				<expression><![CDATA[$P{nombreGenericoMedicamentoPreescrito}]]></expression>
 				<property name="com.jaspersoft.studio.unit.y" value="px"/>
 				<property name="com.jaspersoft.studio.unit.height" value="px"/>
 				<box padding="2"/>
 			</element>
-			<element kind="staticText" uuid="5819e3bb-bd78-4060-a614-4547d04028cd" positionType="Float" x="0" y="54" width="515" height="14" bold="true" vTextAlign="Middle">
+			<element kind="staticText" uuid="5819e3bb-bd78-4060-a614-4547d04028cd" x="0" y="54" width="515" height="14" bold="true" vTextAlign="Middle">
 				<text><![CDATA[Via y cuidado especiales de administracion]]></text>
 			</element>
-			<element kind="textField" uuid="b5389895-b608-4805-9732-c98558be1b0e" positionType="Float" x="0" y="68" width="515" height="24" textAdjust="StretchHeight">
+			<element kind="textField" uuid="b5389895-b608-4805-9732-c98558be1b0e" x="0" y="68" width="515" height="24">
 				<expression><![CDATA[$P{viaCuidadosEspecialesAdmnistracion}]]></expression>
 				<property name="com.jaspersoft.studio.unit.y" value="px"/>
 				<box padding="2"/>
 			</element>
-			<element kind="staticText" uuid="b03f7022-63c1-499b-b7e9-062ac7bf225b" positionType="Float" x="0" y="92" width="515" height="14" bold="true" vTextAlign="Middle">
+			<element kind="staticText" uuid="b03f7022-63c1-499b-b7e9-062ac7bf225b" x="0" y="92" width="515" height="14" bold="true" vTextAlign="Middle">
 				<text><![CDATA[Cocentracion y dosificacion]]></text>
 				<property name="com.jaspersoft.studio.unit.y" value="pixel"/>
 			</element>
-			<element kind="textField" uuid="fce7feae-825f-4e59-bdc6-386c696378e5" positionType="Float" x="0" y="106" width="515" height="24" textAdjust="StretchHeight">
+			<element kind="textField" uuid="fce7feae-825f-4e59-bdc6-386c696378e5" x="0" y="106" width="515" height="24">
 				<expression><![CDATA[$P{concentracionDosificacion}]]></expression>
 				<property name="com.jaspersoft.studio.unit.y" value="px"/>
 				<box padding="2"/>
 			</element>
-			<element kind="staticText" uuid="7a5cd4b3-4254-4d51-a3f5-88ea4ec1bd9b" positionType="Float" x="0" y="130" width="515" height="14" bold="true" vTextAlign="Middle">
+			<element kind="staticText" uuid="7a5cd4b3-4254-4d51-a3f5-88ea4ec1bd9b" x="0" y="130" width="515" height="14" bold="true" vTextAlign="Middle">
 				<text><![CDATA[Frecuencia de administracion cada 24 horas]]></text>
 				<property name="com.jaspersoft.studio.unit.y" value="pixel"/>
 			</element>
-			<element kind="textField" uuid="ed7de3f2-5c25-4d4c-a61b-42e4fc3b49e8" positionType="Float" x="0" y="144" width="515" height="24" textAdjust="StretchHeight">
+			<element kind="textField" uuid="ed7de3f2-5c25-4d4c-a61b-42e4fc3b49e8" x="0" y="144" width="515" height="24">
 				<expression><![CDATA[$P{frecuenciaAdministracion24hrs}]]></expression>
 				<property name="com.jaspersoft.studio.unit.y" value="px"/>
 				<box padding="2"/>
 			</element>
-			<element kind="staticText" uuid="6f056ada-73a9-498e-bab2-7c7ad02f2886" positionType="Float" x="0" y="168" width="515" height="14" bold="true" vTextAlign="Middle">
+			<element kind="staticText" uuid="6f056ada-73a9-498e-bab2-7c7ad02f2886" x="0" y="168" width="515" height="14" bold="true" vTextAlign="Middle">
 				<text><![CDATA[Duracion de tratamiento]]></text>
 				<property name="com.jaspersoft.studio.unit.y" value="pixel"/>
 			</element>
-			<element kind="textField" uuid="7b4a62ae-831a-417f-897a-08f2748b5d9e" positionType="Float" x="0" y="182" width="515" height="24" textAdjust="StretchHeight">
+			<element kind="textField" uuid="7b4a62ae-831a-417f-897a-08f2748b5d9e" x="0" y="182" width="515" height="24">
 				<expression><![CDATA[$P{duracionTratamiento}]]></expression>
 				<property name="com.jaspersoft.studio.unit.y" value="px"/>
 				<box padding="2"/>
 			</element>
-			<element kind="staticText" uuid="cdf1fd49-a1bf-420a-9d6d-84d01d7553b4" positionType="Float" x="0" y="206" width="515" height="14" bold="true" vTextAlign="Middle">
+			<element kind="staticText" uuid="cdf1fd49-a1bf-420a-9d6d-84d01d7553b4" x="0" y="206" width="515" height="14" bold="true" vTextAlign="Middle">
 				<text><![CDATA[Precauciones especiales]]></text>
 				<property name="com.jaspersoft.studio.unit.y" value="pixel"/>
 			</element>
-			<element kind="textField" uuid="f25c02a3-4226-43d7-85fa-64b7c977ef02" positionType="Float" x="0" y="220" width="515" height="24" textAdjust="StretchHeight">
+			<element kind="textField" uuid="f25c02a3-4226-43d7-85fa-64b7c977ef02" x="0" y="220" width="515" height="24">
 				<expression><![CDATA[$P{precaucionesEspeciales}]]></expression>
 				<property name="com.jaspersoft.studio.unit.y" value="px"/>
 				<box padding="2"/>
 			</element>
-			<element kind="staticText" uuid="4e8805bc-67f1-4b50-803d-e5f0961856d3" positionType="Float" x="0" y="244" width="515" height="14" bold="true" vTextAlign="Middle">
+			<element kind="staticText" uuid="4e8805bc-67f1-4b50-803d-e5f0961856d3" x="0" y="244" width="515" height="14" bold="true" vTextAlign="Middle">
 				<text><![CDATA[indicacionesEspeciales]]></text>
 				<property name="com.jaspersoft.studio.unit.y" value="pixel"/>
 			</element>
-			<element kind="textField" uuid="b58066cd-1c76-4e8f-b5ae-fa18aee77d6f" positionType="Float" x="0" y="258" width="515" height="24" textAdjust="StretchHeight">
+			<element kind="textField" uuid="b58066cd-1c76-4e8f-b5ae-fa18aee77d6f" x="0" y="258" width="515" height="24">
 				<expression><![CDATA[$P{indicacionesEspeciales}]]></expression>
 				<property name="com.jaspersoft.studio.unit.y" value="px"/>
 				<box padding="2"/>
 			</element>
-			<element kind="staticText" uuid="4e8805bc-67f1-4b50-803d-e5f0961856d3" positionType="Float" x="0" y="282" width="515" height="14" bold="true" vTextAlign="Middle">
+			<element kind="staticText" uuid="4e8805bc-67f1-4b50-803d-e5f0961856d3" x="0" y="282" width="515" height="14" bold="true" vTextAlign="Middle">
 				<text><![CDATA[Fecha vencimiento]]></text>
 				<property name="com.jaspersoft.studio.unit.y" value="pixel"/>
 			</element>
-			<element kind="textField" uuid="b58066cd-1c76-4e8f-b5ae-fa18aee77d6f" positionType="Float" x="0" y="296" width="515" height="24" textAdjust="StretchHeight">
+			<element kind="textField" uuid="b58066cd-1c76-4e8f-b5ae-fa18aee77d6f" x="0" y="296" width="515" height="24">
 				<expression><![CDATA[$P{fechaVencimiento}]]></expression>
 				<property name="com.jaspersoft.studio.unit.y" value="px"/>
 				<box padding="2"/>
 			</element>
-			<element kind="staticText" uuid="fbc4adb2-bb03-462c-a48f-6fcff500c4bb" positionType="Float" x="0" y="320" width="515" height="14" bold="true" vTextAlign="Middle">
+			<element kind="staticText" uuid="fbc4adb2-bb03-462c-a48f-6fcff500c4bb" x="0" y="320" width="515" height="14" bold="true" vTextAlign="Middle">
 				<text><![CDATA[Cantidad recetada]]></text>
 				<property name="com.jaspersoft.studio.unit.y" value="pixel"/>
 			</element>
-			<element kind="textField" uuid="66e59ba8-8ce0-425e-95b7-294fad32c92a" positionType="Float" x="0" y="334" width="515" height="24" textAdjust="StretchHeight">
+			<element kind="textField" uuid="66e59ba8-8ce0-425e-95b7-294fad32c92a" x="0" y="334" width="515" height="24">
 				<expression><![CDATA[$P{cantidadRecetada}]]></expression>
 				<property name="com.jaspersoft.studio.unit.y" value="px"/>
 				<box padding="2"/>
 			</element>
-			<element kind="staticText" uuid="e9fbba72-6561-48d1-8264-4e68674996c1" positionType="Float" x="0" y="358" width="515" height="14" bold="true" vTextAlign="Middle">
-				<text><![CDATA[Cantidad suministrada]]></text>
+			<element kind="staticText" uuid="e9fbba72-6561-48d1-8264-4e68674996c1" x="0" y="358" width="515" height="14" bold="true" vTextAlign="Middle">
+				<text><![CDATA[Cantidad dispensada]]></text>
 				<property name="com.jaspersoft.studio.unit.y" value="pixel"/>
 			</element>
-			<element kind="textField" uuid="4fd942bb-9966-451a-9204-6dac8ac4854c" positionType="Float" x="0" y="372" width="515" height="24" textAdjust="StretchHeight">
+			<element kind="textField" uuid="4fd942bb-9966-451a-9204-6dac8ac4854c" x="0" y="372" width="515" height="24">
 				<expression><![CDATA[$P{cantidadSuministrada}]]></expression>
 				<property name="com.jaspersoft.studio.unit.y" value="px"/>
 				<box padding="2"/>

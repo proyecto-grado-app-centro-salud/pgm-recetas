@@ -131,4 +131,14 @@ public class RecetasController {
             return new ResponseEntity<>(HttpStatus.INTERNAL_SERVER_ERROR);
         }
     }
+    @DeleteMapping(value = "/historia-clinica/{id}")
+    public ResponseEntity<Void> deleteRecetasDeHistoriaClinica(@PathVariable int id) {
+        try{
+            recetasService.deleteRecetasDeHistoriaClinica(id);
+            return new ResponseEntity<>(HttpStatus.OK);
+        } catch (Exception e) {
+            e.printStackTrace();
+            return new ResponseEntity<>(HttpStatus.INTERNAL_SERVER_ERROR);
+        }
+    }
 }

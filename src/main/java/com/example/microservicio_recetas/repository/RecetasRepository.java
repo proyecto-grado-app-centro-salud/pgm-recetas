@@ -1,10 +1,12 @@
 package com.example.microservicio_recetas.repository;
 
+import java.util.Date;
 import java.util.List;
 import java.util.Optional;
 
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.JpaSpecificationExecutor;
+import org.springframework.data.jpa.repository.Modifying;
 
 import com.example.microservicio_recetas.model.RecetasEntity;
 
@@ -36,5 +38,9 @@ public interface RecetasRepository extends JpaRepository<RecetasEntity, Integer>
     + "WHERE p.idUsuario = :idPaciente")
     List<RecetasEntity> obtenerNotasEvolucionPaciente(@Param("idPaciente") int idPaciente);
     Optional<RecetasEntity> findByIdRecetaAndDeletedAtIsNull(int idReceta);
+
+    @Modifying
+    @Query(value = "UPDATE recetas SET deleted_at = ?2 WHERE id_historia_clinica = ?1", nativeQuery = true)
+    void markAsDeletedAllRecetasFromHistoriaClinica(int idHistoriaClinica, Date date);
 
 }
